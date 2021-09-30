@@ -1,12 +1,5 @@
 function symbols = image2symbols(I, net, numSymbols)
 
-%% segment frame from the image
-C = semanticseg(I, net);
-featureMap = (C== 'Frame'); % Create a logical matrix of the feature map
-numberToExtract = 1;
-featureMap = ExtractNLargestBlobs(featureMap, numberToExtract);
-featureMap = imfill(featureMap,'holes');
-
 %% extract corners 
 corners = FindVerticesWithHoughLines(net,I,1);
 

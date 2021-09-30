@@ -2,12 +2,12 @@ function vertices = FindVerticesWithHoughLines(semanticNet,img,numOrig)
 
 C = semanticseg(img,semanticNet);
 featureMap = (C=='Frame');
-featureMap = (featureMap*255);
+% featureMap = (featureMap*255);
 
 dim = size(img);
-featureMap = imgaussfilt(featureMap,5);
-% featureMap = ExtractNLargestBlobs(featureMap, 1);
-% featureMap = imfill(featureMap,'holes');
+featureMap = ExtractNLargestBlobs(featureMap, 1);
+featureMap = imfill(featureMap,'holes');
+featureMap = imgaussfilt(double(featureMap),5);
 bwFeatureMap = edge(featureMap,'canny');
 % hold off
 % figure;
@@ -15,7 +15,7 @@ bwFeatureMap = edge(featureMap,'canny');
 
 [H,T,R] = hough(bwFeatureMap);
 P  = houghpeaks(H,5,'threshold',ceil(0.3*max(H(:))));
-lines = houghlines(bwFeatureMap,T,R,P,'FillGap',50,'MinLength',7);
+lines = houghlines(bwFeatureMap,T,R,P,'FillGap',50,'MinLength',3);
 gradient=0;
 aveX=0;
 aveY=0;
