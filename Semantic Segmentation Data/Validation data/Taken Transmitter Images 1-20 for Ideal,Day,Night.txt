@@ -1,0 +1,8 @@
+Taken transimtter 1-20 for ideal, day and night
+
+1  -> 20   = ideal channel NO NOISE
+20 -> 40   = ideal channel NOISE
+40 -> 60   = day NO NOISE
+60 -> 80   = day NOISE
+80 -> 100  = night NO NOISE
+100 -> 120 = night NOISE
