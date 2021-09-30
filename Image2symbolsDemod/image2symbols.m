@@ -5,20 +5,13 @@ C = semanticseg(I, net);
 featureMap = (C== 'Frame'); % Create a logical matrix of the feature map
 numberToExtract = 1;
 featureMap = ExtractNLargestBlobs(featureMap, numberToExtract);
-
+featureMap = imfill(featureMap,'holes');
 
 %% extract corners 
-K = (1/25)*ones(5); % smooth factor
-featureMap = conv2(featureMap,K,'same');
-
-
-[featureMap,J]=find(featureMap>max(featureMap(:))/2);
-IJ=[featureMap,J];  
-[~,idx]=min(IJ*[1 1; -1 -1; 1 -1; -1 1].');
-corners=IJ(idx,:);
+corners = FindVerticesWithHoughLines(net,I,1);
 
 %% Apply Perspective Warping followed by cropping of the frame 
-movingPoints = [corners(1,2) corners(1,1); corners(3,2),corners(3,1); corners(2,2),corners(2,1); corners(4,2),corners(4,1)];%coordinate of distorted corners 
+movingPoints = [corners(4,1) corners(4,2); corners(2,1),corners(2,2); corners(1,1),corners(1,2); corners(3,1),corners(3,2)];%coordinate of distorted corners
 fixedPoints=[0 0;size(I,1) 0;size(I,1) size(I,2);0 size(I,2)]; %coordinate of image's corners
 
 tform = fitgeotrans(movingPoints,fixedPoints,'projective');
