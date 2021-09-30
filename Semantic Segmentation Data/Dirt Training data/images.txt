@@ -1,7 +1,22 @@
-Used 1-30 of transmitter frame for each of four types
-10 frames for water
+1-180 Clean data
+60 for each channel condition.
+1-60 ideal channel
+60-120 ambient light.
+120-180 nighttime.
 
-1. Fine pepper, parprika and cinnamon
-2. Course pepper
-3. Fine salt and sugar
-4. Dirty water (with fine pepper)
+181-500 dirty lens.
+
+181-210 ideal channel, fine pepper
+211-240 ideal, coarse pepper
+241-270 ideal, salt and sugar
+271-280 ideal, water
+
+281-310 ambient channel, fine pepper
+311-340 ambient, coarse pepper
+341-370 ambient, salt and sugar
+371-385 ambient, water
+
+386-415 night, fine pepper,
+416-445 night, coarse pepper,
+446-469 night, salt and sugar,
+470-500 ambient, water.
