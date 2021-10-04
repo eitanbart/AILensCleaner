@@ -11,6 +11,9 @@ featureMap = ExtractNLargestBlobs(featureMap, 1);
 featureMap = imfill(featureMap,'holes');
 featureMap = imgaussfilt(double(featureMap),5);
 bwFeatureMap = edge(featureMap,'canny');
+
+% imwrite(bwFeatureMap,'FeatureMap.jpg');
+% bwFeatureMap = imread('FeatureMap.jpg');
 % hold off
 % figure;
 % imshow(bwFeatureMap)
