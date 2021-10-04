@@ -24,5 +24,6 @@ blockVectorR = blockVectorR(1:numSymbols);
 wholeBlockCols = floor(columns / blockSizeC);
 blockVectorC = [blockSizeC * ones(1, wholeBlockCols), rem(columns, blockSizeC)];
 blockVectorC = blockVectorC(1:numSymbols);
+
 symbols = mat2cell(frame, blockVectorR, blockVectorC, numberOfColorBands);
 
