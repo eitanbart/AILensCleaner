@@ -1,9 +1,11 @@
 function vertices = FindVerticesWithHoughLines(semanticNet,img,numOrig)
 
+%% perform Semantic Segmentation to extract a feature map
 C = semanticseg(img,semanticNet);
 featureMap = (C=='Frame');
 % featureMap = (featureMap*255);
 
+%% Find the largest blob, fill in any holes, extract edge from feature map
 dim = size(img);
 featureMap = ExtractNLargestBlobs(featureMap, 1);
 featureMap = imfill(featureMap,'holes');
@@ -13,6 +15,7 @@ bwFeatureMap = edge(featureMap,'canny');
 % figure;
 % imshow(bwFeatureMap)
 
+%% Find the lines of the outline of the frame using Hough Transform
 [H,T,R] = hough(bwFeatureMap);
 P  = houghpeaks(H,5,'threshold',ceil(0.3*max(H(:))));
 lines = houghlines(bwFeatureMap,T,R,P,'FillGap',50,'MinLength',3);
@@ -101,6 +104,7 @@ for i=1:4
 end
 % hold on
 
+%% Find the intersection of each line
 curve=[x;yArr(1,:);x;yArr(2,:);x;yArr(3,:);x;yArr(4,:)];
 vertices=double(zeros(4,2));
 iteration=1;
